@@ -14,12 +14,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>flex练习</title>
+    <style>
+        :root{
+            font-size: 15px;
+        }
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width:100vw;
+            height: 100vh;
+            display: flex;/* 设置为弹性布局 */
+            flex-direction: row;/* 设置主轴的方向为从左到右 */
+            flex-wrap: wrap;/* 换行 */
+            justify-content: space-between;/* 在主轴方向的对齐方式，两端对齐 */
+        }
+        h4{
+            text-align: center;
+        }
+        .in-box{
+            flex: 0 0 30%; /* 三个属性分别是flex-grow、flex-shrink、flex-basis的简写  */
+            /* 
+                flex-grow：项目放大的比例，默认为0；
+                flex-shrink：项目缩小比例，默认为1；
+                flex-basis：项目初始宽度
+             */
+            width: 150px;
+            height: 100px;
+            border: .1rem solid pink;
+        }
+    </style>
+    <script>
+        let obj=document.getElementById('box');
+        for(let i=0;i<9;i++){
+            
+        }
+    </script>
 </head>
 <body>
+    <h4>弹性布局</h4>
+    <div class="box" id="box">
+        <div class="in-box"></div>
+    </div>
+
     <div class="box">
-        <div class="in-box"></div>
-        <div class="in-box"></div>
         <div class="in-box"></div>
     </div>
 </body>
+
 </html>
