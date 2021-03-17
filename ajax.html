@@ -1,0 +1,76 @@
+<!-- 
+/*
+ * @Author: dana 
+ * @Date: 2021-03-17 15:18:09 
+ * @Last Modified by: dana
+ * @Last Modified time: 2021-03-17 16:15:51
+ */
+-->
+
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax获取数据</title>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <h4>ajax获取数据--原生js</h4>
+        <div class="box" id="box1"></div>
+    </div>
+
+    <div class="box" id="box2">
+        <h4>ajax获取数据--jquery</h4>
+    </div>
+
+    <script>
+        // 原生js使用ajax
+        window.onload = function () {
+            let xhrjs = new XMLHttpRequest();
+            xhrjs.open('get', 'http://152.136.185.210:7878/api/m5/recommend');
+            // post请求需要设置响应头
+            // xhrjs.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            // send()用来放置参数
+            xhrjs.send();
+            xhrjs.onreadystatechange = function () {
+                if (xhrjs.readyState == 4 && xhrjs.status == 200) {
+                    let list = '';
+                    let obj = JSON.parse(xhrjs.responseText).data.list;
+                    // console.log(obj, typeof (obj))
+                    for (let i in obj) {
+                        // console.log(obj[i])
+                        list += '<div>' + '$' + obj[i].discountPrice + '</div>'
+                    }
+                    document.getElementById("box1").innerHTML = list;
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        //jquery 使用ajax
+        $(function () {
+            let list = {'type':'pop','page':1};
+            $.ajax({
+                type: 'get',
+                contentType: "application/json;charset=UTF-8",
+                url: 'http://152.136.185.210:7878/api/m5/home/data',
+                data: {
+                    'type':'pop','page':1
+                },
+                success: function (res) {
+                    let list='<div>' +  res.data.title + '</div>'
+                    $("#box2").append(list)
+                }, error: function () {
+
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
