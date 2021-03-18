@@ -48,4 +48,7 @@
 5xx:服务器错误|503|请求未完成，服务器临时过载/当机|
 5xx:服务器错误|504|网关超时|
 
+### 4. IE盒子模型与W3C盒子模型(测试详见兼容1)
 
+IE=height+margin
+W3C=height+padding+margin
