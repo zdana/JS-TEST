@@ -67,3 +67,20 @@ W3C=height+padding+margin
 + resolved/rejected后的代码依旧会执行，resolved/rejected只是表示传参，将pending状态转为rejected/resolved；
   若不写rejected/resolved则之后的then不执行<==原因：此时一直处于pending状态
 + 实例详见promise
+
+### 6.常见浏览器兼容
+序号|问题|解决方案|备注
+--|:--|:--|:--
+01|不同浏览器的padding和margin|*{padding:0;margin:0}||
+02|在Firefox中可用const定义常量，IE中只能用var定义常量|统一用var定义常量|
+03|事件绑定|IE：attachEvent();其他浏览器：addeventListener|
+04|IE与其他浏览器不同|IE：ActiveXObject;其他浏览器：XMLHttpRequest|
+05|IE中event有srcElement属性，没有target属性；其他有target属性，没有sreElement属性|srcObj=event.srcElement?event.srcElement:targetevent.|
+06|透明度IE与其他浏览器不同|IE：filter:progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=60)。FF：opacity:0.6|
+07|IE与其他浏览器盒子模型不同|.box{width:100px;border:2px}div{margin:30px !importent;margin:28px}|IE的盒子模型包括border;!importent属性只有ie无法识别；
+08|ul和ol的列表样式及缩紧（ie、firefox、其他浏览器）|list-style:node;margin:0;padding:0|
+09|水平居中|IE：父元素text-align:center;其他浏览器：margin:0 auto|
+10|margin加倍(ie6会出现)|div添加属性，display:inline|div在flot情况下设置margin会加倍|
+11|高度自适应|内部元素上下各添加一个css属性为{height:0;overflow:hidden}的div|内层高度发生变化时，外层高度不能进行自动调节，特别是内层的margin和padding改变时|
+12|内容超过长度出现省略号|{width:200px;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;overflow:hidden;}|目前仅适用于ie，safari，chrome
+13|a标签点击过后hover样式不再出现|a:link {}a:visited {}a:hover {}a:active {}|改变这四个的顺序|
