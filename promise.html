@@ -1,0 +1,99 @@
+<!-- 
+/*
+ * @Author: dana 
+ * @Date: 2021-03-18 15:35:08 
+ * @Last Modified by: dana
+ * @Last Modified time: 2021-03-19 10:29:18
+ */
+-->
+
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+
+<body>
+    <script>
+        // // 回调金字塔写法
+        // setTimeout(() => {
+        //     let a = 2;
+        //     console.log('金字塔第一次回调', a)
+        //     setTimeout(() => {
+        //         console.log('金字塔第二次回调', a * 2)
+        //     }, 2000);
+        // }, 3000);
+        // // Promises写法
+        // var promise = new Promise((resolve,rejected) => {
+        //     setTimeout(() => {
+        //         let a = 2;
+        //         console.log('promise--第一次回调',a)
+        //         // 确定promise不可能失败则判断语句不需要，可直接调用resolve
+        //         //if(true){
+        //             resolve(a)
+        //         // }
+        //         // else{
+        //         //     rejected('buok')
+        //         // }
+        //     }, 3000);
+        // })
+        // promise.then((value)=>{
+        //     setTimeout(() => {
+        //         console.log('promise--两层--第二次回调',value*2)
+        //     }, 2000);
+        // },(err)=>{
+        //     console.log(err)
+        // })
+        // //  Promises写法--三层回调
+        // promise.then((value)=>{
+        //     return new Promise((resolve,rejected)=>{
+        //         setTimeout(() => {
+        //             console.log('promise--三层--第二次回调',value*2);
+        //             resolve(value*2)
+        //         }, 2000);
+        //     })
+        // }).then((value)=>{
+        //     setTimeout(() => {
+        //         console.log('promise--三层--第三次回调',value*2);
+        //     }, 1000);
+        // })
+
+        /*
+            promisee.all
+            执行逻辑:   
+                    1. 在promise.all中同时调用p1和p2，根据setTimeout可知p2比p1先执行，此时执行77行；
+                    2. 将value值传给value，在return new promise中存在异步延时，因此73行先执行完成，后86行执行完成
+                    3. 执行93行
+        */
+        let p1=new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                console.log('Promises.all 第一次回调');
+                reject(3)
+            }, 3000);
+        })
+        let p2=new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                console.log('Promises.all 第二次回调')
+                reject(2)
+            }, 2000);
+        })
+        Promise.all([p1,p2]).catch((value)=>{
+            return new Promise((resolve,reject)=>{
+                setTimeout(() => {
+                    console.log('Promises.all 第三次回调',value*2);
+                    resolve(value*2)
+                }, 2000);
+            })
+        }).then((value)=>{
+            setTimeout(() => {
+                console.log('Promises.all 第四次回调',value*2)
+            }, 1000);
+        })
+    </script>
+</body>
+
+</html>

@@ -52,3 +52,18 @@
 
 IE=height+margin
 W3C=height+padding+margin
+
+### 5.Promises
++ 用于解决回调金字塔(回调圣诞树/回调地狱)
++ Promises写法本质：将异步写法改成同步写法，原因：
+    + js是单线程运行，类似于流水线，单条单条执行；
+        + 所有任务都要排队；
+        + 若单条任务执行时间过长，会导致进程阻塞
+    + 分为三种状态：pending/rejected/resolved
+        + resolved：将状态从未完成改成成功，在异步操作成功时调用，并将异步操作的结果作为参数传递出去
+        + rejected：将状态从未成功改为失败，在异步操作失败时调用，并将异步操作报出的错误作为参数传递出去
++ 传入Promises构造函数的函数参数会优先执行第一行代码，按顺序执行代码；
++ .them会等到promise对象实例有结果后再执行其中的代码
++ resolved/rejected后的代码依旧会执行，resolved/rejected只是表示传参，将pending状态转为rejected/resolved；
+  若不写rejected/resolved则之后的then不执行<==原因：此时一直处于pending状态
++ 实例详见promise

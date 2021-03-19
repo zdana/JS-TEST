@@ -3,7 +3,7 @@
  * @Author: dana 
  * @Date: 2021-03-17 15:18:09 
  * @Last Modified by: dana
- * @Last Modified time: 2021-03-18 15:28:06
+ * @Last Modified time: 2021-03-18 15:31:22
  */
 -->
 
@@ -49,13 +49,17 @@
             
             IE6以下版本：占据的位置是200*180=(100+50*2)*(80+50*2)
                        盒子实际大小为100*80=(100)*(80)
+
             原因：Chrome中content的height=height；
                  IE中content的height=height-border-padding；
                  也就是说在IE6以下版本中height包含height和border；
+
             解决该兼容性的方法：避免触发IE盒子模型，在<!DOCTYPE html>中进行声明
                  <!doctype html public "-//w3c//dtd xhtml 1.0 transitional//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-transitional.dtd">
-        box-sizing:content-box--表示w3c盒子模型，即margin+border不计入height/width；
-                   border-box--表示ie盒子模型，即margin+padding计入height/width
+                 
+            box-sizing:content-box--表示w3c盒子模型，即margin+border不计入height/width；
+                       border-box--表示ie盒子模型，即margin+padding计入height/width；
+                       inherit--表示box-sizing的值从父元素继承
      -->
     <div class="test">
         <span>W3C盒子模型</span>
