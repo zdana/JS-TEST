@@ -84,3 +84,15 @@ W3C=height+padding+margin
 11|高度自适应|内部元素上下各添加一个css属性为{height:0;overflow:hidden}的div|内层高度发生变化时，外层高度不能进行自动调节，特别是内层的margin和padding改变时|
 12|内容超过长度出现省略号|{width:200px;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;overflow:hidden;}|目前仅适用于ie，safari，chrome
 13|a标签点击过后hover样式不再出现|a:link {}a:visited {}a:hover {}a:active {}|改变这四个的顺序|
+
+### 7. h5中唤醒手机拨打电话
++ 在heade标签中添加
+```
+    <meta name="format-detection" content="telephone=yes"/>
+```
++ 在js中加入：window.location.href='tel:400-000-000'
++ 或在html的a标签中写入href='tel:'400-000-000'
+
+### 8. h5中唤醒手机发送短信
++ 在js中加入：window.location.href='sms:10086?body=短信内容'
++ 或在html的a标签中写入href='sms:10086?body=短信内容'
