@@ -102,3 +102,4 @@ W3C=height+padding+margin
 + 将String类型转为Int类型有两种方法：
     + Number(x):推荐使用改种方法
     + parsenInt(x)
++ x.toString() :表示将x有int型转换为string型
