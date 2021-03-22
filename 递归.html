@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>递归</title>
+</head>
+<body>
+    <div>
+        原始值：1<br>
+        每次递归增加的值：1<br>
+        递归次数：<input type="text" id="count"><br>
+        递归结果：<span id="endValue"></span><br>
+        <button id="btn">计算结果</button>
+    </div>
+    <script>
+        let btn=document.getElementById('btn');
+        btn.onclick=function(){
+            let count=Number(document.getElementById('count').value);
+            document.getElementById('endValue').innerHTML=sum(count)
+        }
+        function sum(c){
+            if(c==1){
+                return c
+            }else{
+                return sum(c-1)+c
+            }
+        };
+    </script>
+</body>
+</html>
