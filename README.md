@@ -96,3 +96,9 @@ W3C=height+padding+margin
 ### 8. h5中唤醒手机发送短信
 + 在js中加入：window.location.href='sms:10086?body=短信内容'
 + 或在html的a标签中写入href='sms:10086?body=短信内容'
+
+### 9. 进制转换
++ x.toString(2) :表示将x转为2进制
++ 将String类型转为Int类型有两种方法：
+    + Number(x):推荐使用改种方法
+    + parsenInt(x)

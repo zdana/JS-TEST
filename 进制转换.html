@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>进制转换</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="input">
+        <button id="btn">开始转换</button><br>
+
+        10转2:<span id="ten-two"></span><br>
+        10转8:<span id="ten-eight"></span><br>
+        10转16:<span id="ten-sixten"></span><br>
+        2转8:<span id="two-eight"></span><br>
+        2转10:<span id="two-ten"></span><br>
+        2转16: <span id="two-sixten"></span><br>
+        8转2:<span id="eight-two"></span><br>
+        8转10:<span id="eight-ten"></span><br>
+        8转16:<span id="eight-sixten"></span><br>
+        16转2:<span id="sixten-two"></span><br>
+        16转8:<span id="sixten-eight"></span><br>
+        16转10:<span id="sixten-ten"></span><br>
+    </div>
+    <script>
+        // window.onload=function(){
+        let btn = document.getElementById('btn');
+        let input = document.getElementById('input')
+        btn.onclick = function () {
+            let inputValue = input.value
+            document.getElementById('ten-two').innerHTML = Number(inputValue).toString(2)
+            document.getElementById('ten-eight').innerHTML = Number(inputValue).toString(8)
+            document.getElementById('ten-sixten').innerHTML = Number(inputValue).toString(16)
+            document.getElementById('two-eight').innerHTML = Number(inputValue).toString(8)
+            document.getElementById('two-ten').innerHTML = Number(inputValue).toString(10)
+            document.getElementById('two-sixten').innerHTML = Number(inputValue).toString(16)
+            document.getElementById('eight-two').innerHTML = Number(inputValue).toString(2)
+            document.getElementById('eight-ten').innerHTML = Number(inputValue).toString(10)
+            document.getElementById('eight-sixten').innerHTML = Number(inputValue).toString(16)
+            document.getElementById('sixten-two').innerHTML = Number(inputValue).toString(2)
+            document.getElementById('sixten-eight').innerHTML = Number(inputValue).toString(8)
+            document.getElementById('sixten-ten').innerHTML = Number(inputValue).toString(16)
+        }
+        // }
+    </script>
+</body>
+
+</html>
