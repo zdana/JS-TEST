@@ -103,3 +103,12 @@ W3C=height+padding+margin
     + Number(x):推荐使用改种方法
     + parsenInt(x)
 + x.toString() :表示将x有int型转换为string型
+
+### 10. 使用git
++ 在git上创建项目后如果此时项目唯恐，则必须先commit，创建新分支，再进行推送
++ git init
++ git add README.md
++ git commit -m "first commit"
++ git branch -M main
++ git remote add origin git@github.com:zdana/vue-exercises.git
++ git push -u origin main
