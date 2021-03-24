@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>svg练习</title>
+</head>
+<body>
+    <svg width="800" height="800">
+        <!-- 绘制矩形 -->
+        <rect width="50" height="50" style="fill: red;"/>
+        <!-- 绘制线条 -->
+        <line x1="100" y1="100" x2="250" y2="75"
+            style="stroke:blue; stroke-width: 1;"
+        />
+        <line x1="250" y1="75" x2="300" y2="100"
+            style="stroke:blue; stroke-width: 1;"
+        />
+        <!-- 绘制圆 -->
+        <!-- 属性有两种方法：利用style和直接作为属性 -->
+        <circle
+            cx="200"
+            cy="200"
+            r="50"
+            stroke="green"
+            stroke-width="2"
+            fill="red"
+        />
+        <line x1="300" y1="300" x2="301" y2="301"
+            style="stroke:blue; stroke-width: 1;"
+        />
+    </svg>
+</body>
+</html> 

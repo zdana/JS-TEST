@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas绘图练习</title>
+</head>
+<body>
+    <!-- 第一步：编写canvas标签，指定宽高 -->
+    <canvas id="canvas" height="800" width="800"></canvas>
+    <script>
+        /** @type {HTMLCanvasElement} */
+        // 第二步：获取canvas的dom对象
+        const canvas=document.getElementById('canvas')
+        // 第三步：获取canvas对象
+        const ctx=canvas.getContext('2d');
+        
+        // 设置绘图属性
+        // 绘制正方形
+        ctx.fillStyle='red';//表示填充色
+        ctx.fillRect(0,0,50,50);//(0,0)表示图形的位置,(50,50)表示长和宽都为50
+
+        // 绘制线条
+        ctx.beginPath();//开始绘制线条
+        ctx.lineWidth=1;//线条粗细为1
+        ctx.strokeStyle='blue';//线条颜色
+        ctx.moveTo(100,100)//线条开始的绘制点
+        ctx.lineTo(250,75);//线条结束/转折的点
+        ctx.lineTo(300,100);
+        // 调用绘图api
+        ctx.stroke()//线条绘制结束，不写本行语句，则线条将不回显示
+
+        // 绘制圆形
+        ctx.beginPath();//结束上一段的绘制
+        ctx.lineWidth=2;
+        ctx.strokeStyle='green';
+        ctx.fillStyle='yellow';
+        ctx.arc(200,200,50,0,2*Math.PI);//绘制圆形，分别表示圆心的x、y坐标，半径长度，起始角度和终止角度
+        ctx.stroke();
+        ctx.fill()
+
+        // 绘制点
+        ctx.beginPath();
+        ctx.lineWidth=1;
+        ctx.strokeStyle='red';
+        ctx.moveTo(300,300)//线条开始的绘制点
+        ctx.lineTo(301,301);//线条结束/转折的点
+        ctx.stroke();
+    </script>
+</body>
+</html>

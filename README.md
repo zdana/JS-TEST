@@ -1,3 +1,5 @@
+## 本项目主要是针对练习js、html一些特性、方式
+
 ### 1. script标签
 + 建议放在body闭合标签前
 + JavaScript代码是载入后立刻执行的；执行时会阻塞页面后续的内容（如页面的渲染、图片资源的加载）
@@ -112,3 +114,10 @@ W3C=height+padding+margin
 + git branch -M main
 + git remote add origin git@github.com:zdana/vue-exercises.git
 + git push -u origin main
+
+### 11. canvas没有代码提示
++ 在script使用canvas的代码前加上/** @type {HTMLCanvasElement} */
+
+### 12. svg和canvas的区别
++ svg是利用dom的方式进行编程；在放大的场景下获得更高的清晰度；适合做图标
++ canvas是利用jsapi进行编程；相比较而言有更高的绘图效率
