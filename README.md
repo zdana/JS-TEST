@@ -121,3 +121,7 @@ W3C=height+padding+margin
 ### 12. svg和canvas的区别
 + svg是利用dom的方式进行编程；在放大的场景下获得更高的清晰度；适合做图标
 + canvas是利用jsapi进行编程；相比较而言有更高的绘图效率
+
+### 13. zrender
++ 是二维绘图引擎，提供canvas、svg、vml等多种渲染方式；
++ 是Echarts的渲染引擎；
