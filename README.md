@@ -125,3 +125,4 @@ W3C=height+padding+margin
 ### 13. zrender
 + 是二维绘图引擎，提供canvas、svg、vml等多种渲染方式；
 + 是Echarts的渲染引擎；
++ 实际上是对canvas和svg进行的一次封装

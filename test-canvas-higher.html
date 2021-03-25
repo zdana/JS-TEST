@@ -69,12 +69,13 @@
                 ctx.drawImage(image,0,0,maxW,maxH);
                 const compressImage=canvas.toDataURL('image/jpeg',0.9);//输出图片格式为jped，同时图片质量为0.9
                 callback && callback(compressImage);
-                const _image=new Image();
-                _image.src=compressImage;
-                document.body.append(_image)
-                // console.log(compressImage)
+                /*
+                    代码简化后，以下三行可省略
+                */
+                // const _image=new Image();
+                // _image.src=compressImage;
+                // document.body.append(_image)
                 canvas.remove();
-                // console.log(image.src.length/_image.src.length)
             })
             image.src = base64Image;
             document.body.appendChild(image)
