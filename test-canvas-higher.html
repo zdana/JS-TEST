@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas高阶绘图练习</title>
+</head>
+
+<body>
+    <input type="file" id="upload">
+    <script>
+        // 定义可接收的图片格式
+        const ACCEPT = ['image/jpg', 'image/png', 'image/jpeg'];
+        const MAXSIZE = 1024 * 1024;
+        const MAXSIZE_STR = '1MB';
+        /*
+            压缩文件需要将文件转化为base64格式
+        */
+        function convertImageToBase64(file, callback) {
+            let reader = new FileReader();
+            // 文件加载完毕之后调用该事件
+            reader.addEventListener('load', function (e) {
+                const base64Image = e.target.result;
+                callback && callback(base64Image);
+                reader = null;//内存回收
+            })
+            reader.readAsDataURL(file);
+        }
+        // 图片压缩函数
+        /*
+            创建image对象获得图片宽高
+            进行判断，再进行压缩，再利用canvas进行绘制输出
+        */
+        function compress(base64Image,callback) {
+            const image = new Image();
+            let maxH = 1024;
+            let maxW = 1024;
+            // 对图片宽高进行压缩
+            image.addEventListener('load', function (e) {
+                let ratio;//压缩比
+                let needCompress=false;//是否压缩
+                if(maxW<image.naturalWidth){
+                    needCompress=true;
+                    ratio=image.naturalWidth/maxW;
+                    maxH=image.naturalHeight/ratio;
+                    console.log(ratio,maxH)
+                }
+                if(maxH<image.naturalHeight){
+                    needCompress=true;
+                    ratio=image.naturalHeight/maxH;
+                    maxW=image.naturalWidth/ratio
+                }
+                // 不需要压缩，获取图片实际宽高
+                if(!needCompress){
+                    maxW=image.naturalWidth;
+                    maxH=image.naturalHeight
+                }
+                /** @type {HTMLCanvasElement} */
+                const canvas=document.createElement('canvas');
+                canvas.setAttribute('id','__compress__');
+                canvas.width=maxW;
+                canvas.height=maxH;
+                canvas.style.visibility='visable';
+                document.body.appendChild(canvas);
+                const ctx=canvas.getContext('2d');
+                ctx.clearRect(0,0,maxW,maxH);
+                ctx.drawImage(image,0,0,maxW,maxH);
+                const compressImage=canvas.toDataURL('image/jpeg',0.9);//输出图片格式为jped，同时图片质量为0.9
+                callback && callback(compressImage);
+                const _image=new Image();
+                _image.src=compressImage;
+                document.body.append(_image)
+                // console.log(compressImage)
+                canvas.remove();
+                // console.log(image.src.length/_image.src.length)
+            })
+            image.src = base64Image;
+            document.body.appendChild(image)
+        }
+        
+        // 监听input输入框的change事件
+        function unploadToServer(compressImage){
+            console.log('upload to server...',compressImage);
+        }
+        const upload = document.getElementById('upload');
+        upload.addEventListener('change', function (e) {
+            const [file] = e.target.files; //es6中的一种数组结构写法
+            if (!file) {
+                return;
+            }
+            // 利用解构写法进行校验
+            // 判断文件支持类型
+            const { type: fileType, size: fileSize } = file;
+            // 判断上传的文件类型是否在接收范围内
+            // 判断方法1:原始方法
+            // if(ACCEPT.indexOf(fileType)<0) {
+            //     alert('不支持'+[fileType]+'文件类型')
+            // }
+            // 判断方法2:es6中提供的方法
+            if (!ACCEPT.includes(fileType)) {
+                alert(`不支持[${fileType}]文件类型`);
+                upload.value = ''
+                return;
+            }
+            // 判断文件大小，超出则重置
+            if (fileSize > MAXSIZE) {
+                alert(`文件超出${MAXSIZE_STR}!`);
+                upload.value = ''
+                return;
+            }
+            // 压缩图片
+            convertImageToBase64(file,(base64Image)=>compress(base64Image,unploadToServer))
+        })
+        /** @type {HTMLCanvasElement} */
+
+    </script>
+</body>
+
+</html>
