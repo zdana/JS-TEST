@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入antV在线资源 -->
+    <script src="https://unpkg.com/@antv/l7"></script>
+    <title>antV-l7练习</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="l7-map"></div>
+
+    <script>
+        const scene = new L7.Scene({
+            id: 'l7-map',
+            map: new L7.GaodeMap({
+                style: 'dark',
+                center: [120.587634, 30.040461],//中心点位置
+                pitch: 0,//看地图的仰角
+                zoom: 6,//访问地图的缩放比例
+                token: '7e6be38901bec381d3f4e681cebe909e',//高德地图的token
+            })
+        });
+        scene.on('loaded', function () {
+            fetch(
+                'https://gw.alipayobjects.com/os/basement_prod/337ddbb7-aa3f-4679-ab60-d64359241955.json'
+            )
+                .then(res => res.json())
+                .then(data => {
+                    // 数据清洗
+                    data.features=data.features.filter(item=>item.properties.capacity>1000)//筛选data数据中capacity>1000的数据
+                    // 初始化对象
+                    const pointLayer = new L7.PointLayer({})
+                        .source(data)
+                        .shape('circle')//将地图上的所有点绘制成小圆点
+                        .size('capacity', [0, 16])//capacity是data中的一个属性值，表示capacity最小的时候绘制为0，最大时绘制为16
+                        .color('capacity', [
+                            '#34b6b7',
+                            '#4ac5af',
+                            '#5fd3a6',
+                            '#7be39e',
+                            '#a1edb8',
+                            '#cef8d6'
+                        ])//从0-16过程中圆点颜色的变化
+                        .style({
+                            strokeWidth: 0,
+                            opacity: 0.5//设置圆点的透明度
+                        })
+                        .active(true);//点的交互事件
+                    scene.addLayer(pointLayer);
+                })
+        })
+    </script>
+</body>
+
+</html>
