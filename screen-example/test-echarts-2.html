@@ -13,7 +13,7 @@
             width: 800px;
         }
     </style>
-    
+
 </head>
 
 <body>
@@ -21,21 +21,21 @@
 
     <script>
         const chartDom = document.getElementById('chart');
-        const chart = echarts.init(chartDom,'vintage',{renderer:'svg'});//renderer:'svg'表示渲染出来的图片格式为svg，一般大屏显示推荐svg，较canvas更清楚
+        const chart = echarts.init(chartDom, 'vintage', { renderer: 'svg' });//renderer:'svg'表示渲染出来的图片格式为svg，一般大屏显示推荐svg，较canvas更清楚
         chart.setOption({
             // 数据封装
-            dataset:{
-                source:[
-                    ['一季度', 100 , 79 , '分类1' , 50],
-                    ['二季度', 112 , 81 , '分类2' , 60],
-                    ['三季度', 96 , 88 , '分类3' , 55],
-                    ['四季度', 123 , 72 , '分类4' , 70]
+            dataset: {
+                source: [
+                    ['一季度', 100, 79, '分类1', 50],
+                    ['二季度', 112, 81, '分类2', 60],
+                    ['三季度', 96, 88, '分类3', 55],
+                    ['四季度', 123, 72, '分类4', 70]
                 ]
             },
             // 标题
             title: {
                 text: 'echarts多系列案例',
-                subtext:'数据可视化'//副标题
+                subtext: '数据可视化'//副标题
             },
             // x轴
             xAxis: {
@@ -45,36 +45,37 @@
             // y轴
             yAxis: {},
             // 添加图例
-            legend:{
-                data:['分类','折线图','柱状图']
+            legend: {
+                // 修改图例样式
+                data: [{ name: '分类', icon: 'circle', textStyle: {color:'red'} }, '折线图', '柱状图']
             },
             // 样式
             // series表示系列，可以绘制多个图形；
             // 表现形式为series:[{},{}......
             series: [{
-                name:'分类',
-                type:'pie',
-                center:['65%',60],//饼图所在位置
-                radius:35,
-                encode:{itemName:3,value:4},
+                name: '分类',
+                type: 'pie',
+                center: ['65%', 60],//饼图所在位置
+                radius: 35,
+                encode: { itemName: 3, value: 4 },
                 // data:[
                 //     {name:'分类1',value:50},
                 //     {name:'分类2',value:30},
                 //     {name:'分类3',value:40},
                 //     {name:'分类4',value:30},
                 // ]
-            },{
-                name:'折线图',
-                type:'line',
+            }, {
+                name: '折线图',
+                type: 'line',
                 // data:[100,112,96,123],
-                encode:{x:0,y:1}
-            },{
-                name:'柱状图',
+                encode: { x: 0, y: 1 }
+            }, {
+                name: '柱状图',
                 // 图表类型
                 type: 'bar',
                 // 对应的数据
                 // data: [79, 81, 88, 72]
-                encode:{x:0,y:2}
+                encode: { x: 0, y: 2 }
             }]
         })
     </script>
