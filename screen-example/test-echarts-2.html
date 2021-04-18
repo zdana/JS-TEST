@@ -50,6 +50,32 @@
                 data: [{ name: '分类', icon: 'circle', textStyle: {color:'red'} }, '折线图', '柱状图'],
                 left:300
             },
+            // 坐标系的位置
+            grid:{
+                top:'10%',
+                left:'10%',
+                right:'10%',
+                bottom:'20%'
+            },
+            toolbox:{
+                feature:{
+                    //区域缩放还原
+                    // 需要设置y轴，因为可能存在多个y轴，不设置yAxisIndex会导致选择完区域后图像不显示
+                    dataZoom:{
+                        yAxisIndex:false
+                    },
+                    restore:{},//刷新图形
+                    saveAsImage:{},//保存图形
+                }
+            },
+            // 选择图像数据显示区域
+            dataZoom:[
+                {
+                    show:true,
+                    start:0,//起始位置
+                    end:100//结束
+                }
+            ],
             // 样式
             // series表示系列，可以绘制多个图形；
             // 表现形式为series:[{},{}......
