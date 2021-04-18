@@ -24,20 +24,36 @@
         const chart = echarts.init(chartDom, 'vintage', { renderer: 'svg' });//renderer:'svg'表示渲染出来的图片格式为svg，一般大屏显示推荐svg，较canvas更清楚
         chart.setOption({
             // 多坐标系时需要制定横坐标类型
-            xAxis:{
-                type:'category'
-            },
+            xAxis:[{
+                type:'category',
+                gridIndex:0
+            },{
+                type:'category',
+                gridIndex:1
+            }],
             yAxis:[{
                 // 解决坐标系刻度不一致的方法
                 // 将其刻度设置与第二个坐标的刻度一致
                 min:0,
-                max:100
+                max:100,
+                gridIndex:0
             },{
                 // 解决两个坐标系刻度不一致导致坐标背景线奇怪
                 // 将第二个纵坐标的刻度线隐藏
                 splitLine:{
                     show:false
-                }
+                },
+                gridIndex:0
+            },{
+                min:0,
+                max:150,
+                gridIndex:1
+            }],
+            // 将两个图区分开来
+            grid:[{
+                bottom:'55%'
+            },{
+                top:'55%'
             }],
             dataset:{
                 source:[
@@ -51,11 +67,19 @@
                 type:'bar',
                 // 表示以行的方式进行取数
                 seriesLayoutBy:'row',
+                // 设置对应的x轴坐标
+                xAxisIndex:0,
                 yAxisIndex:0//表示坐标系柱状图是第一个
             },{
                 type:'line',
                 seriesLayoutBy:'row',
+                xAxisIndex:0,
                 yAxisIndex:1
+            },{
+                type:'bar',
+                seriesLayoutBy:'row',
+                xAxisIndex:1,
+                yAxisIndex:2//表示坐标系柱状图是第一个
             }]
         })
     </script>
