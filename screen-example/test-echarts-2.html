@@ -23,20 +23,28 @@
         const chartDom = document.getElementById('chart');
         const chart = echarts.init(chartDom, 'vintage', { renderer: 'svg' });//renderer:'svg'表示渲染出来的图片格式为svg，一般大屏显示推荐svg，较canvas更清楚
         chart.setOption({
-            xAxis:{},
-            yAxis:{},
+            // 多坐标系时需要制定横坐标类型
+            xAxis:{
+                type:'category'
+            },
+            yAxis:[{},{}],
             dataset:{
                 source:[
-                    [13,44],
-                    [51,51],
-                    [51,32],
-                    [67,19],
-                    [19,33]
+                    // 第一行表示横坐标；第二行表示第一个纵坐标，第三行表示第二个纵坐标
+                    ['product','2012','2013','2014','2015'],
+                    ['Matcha Latte',41.1,30.4,65.1,53.3],
+                    ['Milk Tea',86.5,92.1,85.7,83.1]
                 ]
             },
             series:[{
-                type:'scatter',
-                encode:{x:0,y:1}
+                type:'bar',
+                // 表示以行的方式进行取数
+                seriesLayoutBy:'row',
+                yAxisIndex:0//表示坐标系柱状图是第一个
+            },{
+                type:'line',
+                seriesLayoutBy:'row',
+                yAxisIndex:1
             }]
         })
     </script>
