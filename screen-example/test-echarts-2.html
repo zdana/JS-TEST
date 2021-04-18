@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入antV在线资源 -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.js"></script>
-    <title>test-echarts练习-渲染成svg</title>
+    <title>test-echarts练习-多系列图</title>
     <style>
         #chart {
             height: 400px;
@@ -23,6 +23,14 @@
         const chartDom = document.getElementById('chart');
         const chart = echarts.init(chartDom,'vintage',{renderer:'svg'});//renderer:'svg'表示渲染出来的图片格式为svg，一般大屏显示推荐svg，较canvas更清楚
         chart.setOption({
+            dataset:{
+                source:[
+                    ['一季度', 100 , 79 , '分类1' , 50],
+                    ['二季度', 112 , 81 , '分类2' , 60],
+                    ['三季度', 96 , 88 , '分类3' , 55],
+                    ['四季度', 123 , 72 , '分类4' , 70]
+                ]
+            },
             // 标题
             title: {
                 text: 'echarts多系列案例'
@@ -37,25 +45,29 @@
 
             },
             // 样式
-            // 可以绘制多个图形
+            // series表示系列，可以绘制多个图形；
+            // 表现形式为series:[{},{}......
             series: [{
                 type:'pie',
                 center:['65%',60],//饼图所在位置
                 radius:35,
-                data:[
-                    {name:'分类1',value:50},
-                    {name:'分类2',value:30},
-                    {name:'分类3',value:40},
-                    {name:'分类4',value:30},
-                ]
+                encode:{itemName:3,value:4},
+                // data:[
+                //     {name:'分类1',value:50},
+                //     {name:'分类2',value:30},
+                //     {name:'分类3',value:40},
+                //     {name:'分类4',value:30},
+                // ]
             },{
                 type:'line',
-                data:[100,112,96,123]
+                // data:[100,112,96,123],
+                encode:{x:0,y:1}
             },{
                 // 图表类型
                 type: 'bar',
                 // 对应的数据
-                data: [79, 81, 88, 72]
+                // data: [79, 81, 88, 72]
+                encode:{x:0,y:2}
             }]
         })
     </script>
