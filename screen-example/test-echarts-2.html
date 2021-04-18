@@ -23,6 +23,7 @@
         const chartDom = document.getElementById('chart');
         const chart = echarts.init(chartDom,'vintage',{renderer:'svg'});//renderer:'svg'表示渲染出来的图片格式为svg，一般大屏显示推荐svg，较canvas更清楚
         chart.setOption({
+            // 数据封装
             dataset:{
                 source:[
                     ['一季度', 100 , 79 , '分类1' , 50],
@@ -33,7 +34,8 @@
             },
             // 标题
             title: {
-                text: 'echarts多系列案例'
+                text: 'echarts多系列案例',
+                subtext:'数据可视化'//副标题
             },
             // x轴
             xAxis: {
@@ -41,13 +43,16 @@
                 data: ['一季度', '二季度', '三季度', '四季度']
             },
             // y轴
-            yAxis: {
-
+            yAxis: {},
+            // 添加图例
+            legend:{
+                data:['分类','折线图','柱状图']
             },
             // 样式
             // series表示系列，可以绘制多个图形；
             // 表现形式为series:[{},{}......
             series: [{
+                name:'分类',
                 type:'pie',
                 center:['65%',60],//饼图所在位置
                 radius:35,
@@ -59,10 +64,12 @@
                 //     {name:'分类4',value:30},
                 // ]
             },{
+                name:'折线图',
                 type:'line',
                 // data:[100,112,96,123],
                 encode:{x:0,y:1}
             },{
+                name:'柱状图',
                 // 图表类型
                 type: 'bar',
                 // 对应的数据
