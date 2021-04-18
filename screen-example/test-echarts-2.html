@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入antV在线资源 -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.js"></script>
-    <title>test-echarts练习</title>
+    <title>test-echarts练习-渲染成svg</title>
     <style>
         #chart {
             height: 400px;
@@ -21,7 +21,7 @@
 
     <script>
         const chartDom = document.getElementById('chart');
-        const chart = echarts.init(chartDom,'vintage');//renderer:'svg'表示渲染出来的图片格式为svg，一般大屏显示推荐svg，较canvas更清楚
+        const chart = echarts.init(chartDom,'vintage',{renderer:'svg'});//renderer:'svg'表示渲染出来的图片格式为svg，一般大屏显示推荐svg，较canvas更清楚
         chart.setOption({
             // 标题
             title: {
