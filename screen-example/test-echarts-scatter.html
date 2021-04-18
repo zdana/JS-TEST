@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入antV在线资源 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.js"></script>
+    <title>test-echarts练习-多系列图</title>
+    <style>
+        #chart {
+            height: 400px;
+            width: 800px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="chart"></div>
+
+    <script>
+        const chartDom = document.getElementById('chart');
+        const chart = echarts.init(chartDom, 'vintage', { renderer: 'svg' });//renderer:'svg'表示渲染出来的图片格式为svg，一般大屏显示推荐svg，较canvas更清楚
+        chart.setOption({
+            // 数据封装
+            dataset: {
+                source: [
+                    ['一季度', 100, 79, '分类1', 50],
+                    ['二季度', 112, 81, '分类2', 60],
+                    ['三季度', 96, 88, '分类3', 55],
+                    ['四季度', 123, 72, '分类4', 70]
+                ]
+            },
+            // 标题
+            title: {
+                text: 'echarts多系列案例',
+                subtext: '数据可视化'//副标题
+            },
+            // x轴
+            xAxis: {
+                // 数据
+                data: ['一季度', '二季度', '三季度', '四季度']
+            },
+            // y轴
+            yAxis: {},
+            // 添加图例
+            legend: {
+                // 修改图例样式
+                data: [{ name: '分类', icon: 'circle', textStyle: {color:'red'} }, '折线图', '柱状图'],
+                left:300
+            },
+            // 坐标系的位置
+            grid:{
+                top:'10%',
+                left:'10%',
+                right:'10%',
+                bottom:'20%'
+            },
+            toolbox:{
+                feature:{
+                    //区域缩放还原
+                    // 需要设置y轴，因为可能存在多个y轴，不设置yAxisIndex会导致选择完区域后图像不显示
+                    dataZoom:{
+                        yAxisIndex:false
+                    },
+                    restore:{},//刷新图形
+                    saveAsImage:{},//保存图形
+                }
+            },
+            // 选择图像数据显示区域
+            dataZoom:[
+                {
+                    show:true,
+                    start:0,//起始位置
+                    end:100//结束
+                }
+            ],
+            // 样式
+            // series表示系列，可以绘制多个图形；
+            // 表现形式为series:[{},{}......
+            series: [{
+                name: '分类',
+                type: 'pie',
+                center: ['65%', 60],//饼图所在位置
+                radius: 35,
+                encode: { itemName: 3, value: 4 },
+                // data:[
+                //     {name:'分类1',value:50},
+                //     {name:'分类2',value:30},
+                //     {name:'分类3',value:40},
+                //     {name:'分类4',value:30},
+                // ]
+            }, {
+                name: '折线图',
+                type: 'line',
+                // data:[100,112,96,123],
+                encode: { x: 0, y: 1 }
+            }, {
+                name: '柱状图',
+                // 图表类型
+                type: 'bar',
+                // 对应的数据
+                // data: [79, 81, 88, 72]
+                encode: { x: 0, y: 2 }
+            }]
+        })
+    </script>
+</body>
+
+</html>
